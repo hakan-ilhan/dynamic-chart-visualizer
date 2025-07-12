@@ -165,9 +165,24 @@ Projeyi yerel ortamınızda çalıştırmak için aşağıdaki adımları takip 
         $$;
 
        
-        
+### **2. Gizli Bilgileri Yapılandırma**
 
-### 2. Backend Uygulamasını Çalıştırma
+Hassas bilgiler (veritabanı şifresi, JWT gizli anahtarı) doğrudan kodda veya Git'e yüklenen dosyalarda bulunmaz. Güvenlik nedeniyle, bu bilgileri projenizin **`backend/src/main/resources`** klasöründe **`secret.properties`** adında yeni bir dosya oluşturarak tanımlamanız gerekmektedir.
+
+1.  `backend/src/main/resources` klasörüne gidin.
+2.  Bu klasörde **`secret.properties`** adında yeni bir dosya oluşturun.
+3.  Oluşturduğunuz `secret.properties` dosyasını bir metin düzenleyiciyle açın ve içine aşağıdaki satırları ekleyin:
+
+    ```properties
+    # Veritabanı bağlantı şifreniz
+    spring.datasource.password=VERITABANI_SIFRENIZ_BURAYA
+    # JWT tokenları için gizli anahtar (güçlü ve benzersiz bir anahtar kullanın)
+    jwt.secret=GUCLU_JWT_SECRET_ANAHTARINIZ_BURAYA
+    ```
+
+    *Lütfen `VERITABANI_SIFRENIZ_BURAYA` ve `GUCLU_JWT_SECRET_ANAHTARINIZ_BURAYA` kısımlarını kendi PostgreSQL veritabanınızın şifresi ve istediğiniz herhangi bir güçlü JWT gizli anahtarı ile değiştirin.*        
+
+### 3. Backend Uygulamasını Çalıştırma
 
 1.  `backend/` klasörüne gidin: `cd chart-visualizer-backend`
 2.  Maven kullanarak projeyi derleyin ve çalıştırın:
@@ -175,7 +190,7 @@ Projeyi yerel ortamınızda çalıştırmak için aşağıdaki adımları takip 
     * Alternatif olarak, tercih ettiğiniz IDE (IntelliJ IDEA, Eclipse) üzerinden `main` sınıfını çalıştırabilirsiniz.
 3.  Uygulamanın `http://localhost:8080` üzerinde çalıştığından emin olun.
 
-### 3. Frontend Uygulamasını Çalıştırma
+### 4. Frontend Uygulamasını Çalıştırma
 
 1.  `frontend/` klasörüne gidin: `cd chart-visualizer-frontend`
 2.  Gerekli bağımlılıkları yükleyin: `npm install`
